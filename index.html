@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication table</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap');
+        /*font-family: 'Outfit', sans-serif;*/
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-size: 18px;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        :root {
+            --color1: hsl(215, 51%, 70%);
+            --color2: hsl(178, 100%, 50%);
+            --colorBgMain: hsl(217, 54%, 11%);
+            --colorBgCard: hsl(216, 50%, 16%);
+            --colorLine: hsl(215, 32%, 27%);
+            --white: hsl(0, 0%, 100%);
+        }
+
+        body {
+            background-color: var(--colorBgMain);
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 2%;
+            height: 100vh;
+            overflow-x: hidden;
+
+        }
+
+        .estiloBotao {
+            background-color: var(--color2);
+            border-radius: 10px;
+            border: none;
+            padding: 1%;
+            cursor: pointer;
+            width: 7rem;
+        }
+
+        .estiloBotao:hover {
+            opacity: 0.8;
+        }
+
+        .estiloInput {
+            background-color: var(--colorBgCard);
+            border-radius: 10px;
+            border: none;
+            padding: 0.8%;
+            color: var(--white);
+        }
+
+        #caixaConteudo {
+            display: flex;
+            flex-direction: column;
+            background-color: var(--colorBgCard);
+            border-radius: 10px;
+            box-shadow: 0px 0px 200px rgba(6, 3, 33, 1);
+            width: 15rem;
+            height: 15rem;
+            overflow: auto;
+            /* Adiciona barras de rolagem caso o conteúdo seja muito grande */
+            padding: 10px;
+            color: var(--white);
+        }
+
+        #botoes {
+            display: flex;
+            justify-content: space-between;
+            width: 15rem;
+            height: 3rem;
+            order: 1;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="caixaConteudo"></div>
+    <div id="botoes"></div>
+
+
+
+
+    <script>
+
+        // Cria um input element
+        var inserirNumero = document.createElement("input");
+
+        //tipo do input
+        inserirNumero.type = "text";
+        inserirNumero.placeholder = "Digite um número: ";
+
+
+        // Adiciona o input element ao corpo do HTML
+        document.body.appendChild(inserirNumero);
+
+        //classe para estilizar no CSS depois
+        inserirNumero.classList.add("estiloInput");
+
+
+        //criação do botão
+        var botao = document.createElement("button");
+        //valor ao campo do botão
+        botao.innerHTML = "Confirmar"
+        //adicionar o botao ao html
+        document.body.appendChild(botao);
+        //estilo ao botão
+        botao.classList.add("estiloBotao");
+
+        var botaoReset = document.createElement("button");
+        botaoReset.innerHTML = "Resetar";
+        document.body.appendChild(botaoReset);
+        botaoReset.classList.add("estiloBotao");
+
+
+
+        var botoes = document.getElementById("botoes");
+        botoes.appendChild(botao);
+        botoes.appendChild(botaoReset);
+
+
+        // Cria um parágrafo para exibir o número digitado
+        var paragrafoNumeroDigitado = document.createElement("p");
+        paragrafoNumeroDigitado.classList.add("paragrafoNumero")
+
+
+        //evento de clique
+        botao.addEventListener("click", function () {
+            // armazenando o valor que o usuário digitou (.value acessa o valor atualmente digitado no campo)
+            var numeroDigitado = inserirNumero.value;
+            // var corpoDocumento = document.body;
+            var caixaConteudo = document.getElementById("caixaConteudo");
+
+
+
+            for (var indice = 1; indice <= 10; indice++) {
+                // Cria um novo parágrafo para cada iteração
+                var paragrafoNumeroDigitado = document.createElement("p");
+                paragrafoNumeroDigitado.textContent = numeroDigitado + " x " + indice + " = " + numeroDigitado * indice;
+
+                // Adiciona o novo parágrafo ao corpo do documento
+                // corpoDocumento.appendChild(paragrafoNumeroDigitado);
+                caixaConteudo.appendChild(paragrafoNumeroDigitado);
+            }
+
+        });
+
+        botaoReset.addEventListener("click", function () {
+            // Limpar o conteúdo da caixaConteudo
+            caixaConteudo.innerHTML = "";
+            // Limpar o valor no input
+            inserirNumero.value = "";
+            // Remover a classe 'corpo'
+            caixaConteudo.classList.remove("corpo");
+        });
+
+
+    </script>
+
+</body>
+
+</html>
